@@ -1,0 +1,20 @@
+<section class="comments">
+    <% entry.comments.forEach(comment => { %>
+        <div class="comment">
+               
+            <% if (session.administrator || session.authorized) { %>
+                
+                <p class="login"> <%= comment.user.login %> </p>
+                |
+                <a href="/entry/<%=entry.id %>/comment/<%= comment.id%>/update">edit</a>
+                |
+                <form method="post" action="/comment/<%= comment.id %>/delete" style="display:inline">
+                    <input type="submit" value="x">
+                </form>
+            <% } else { %> 
+                <p class="login"> <%= comment.user.login %> </p>
+            <% } %>                      
+        <p><%= comment.content %></p>
+        </div>
+    <% }) %>
+</section>
